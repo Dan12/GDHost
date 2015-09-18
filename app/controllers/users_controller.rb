@@ -18,6 +18,14 @@ class UsersController < ApplicationController
         end
     end
     
+    def login_page
+        render "login"
+    end
+    
+    def login
+    
+    end
+    
     def view
         @user = User.find_by(id: session[:user_id])
         render 'view'
