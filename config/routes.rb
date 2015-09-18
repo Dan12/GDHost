@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   get '/users/create' => 'users#create'
   
   get '/users/view' => 'users#view'
+  
+  post '/file_upload' => 'application#file_upload'
 end
