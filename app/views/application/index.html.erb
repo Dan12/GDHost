@@ -1,6 +1,8 @@
 <h1>hello</h1>
-<a href="/game1">Game 1</a>
-<a href="/signup">Signup</a>
+<% Game.all.each do |g| %>
+    <a href="/game/<%=g.id%>">Game <%=g.id%></a>
+    <br>
+<% end %>
 <%= form_tag({action: :file_upload}, multipart: true) do %>
     <label>.unity3d file</label>
     <%= file_field_tag 'datafile' %>

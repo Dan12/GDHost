@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  before_filter :login_required, :except => [:new, :create, :login_page, :login]
+  before_filter :login_required, :except => [:home, :new, :create, :login_page, :login, :file_upload, :game]
   
   def login_required
     if session[:user_id] == nil || User.find_by(id: session[:user_id]) == nil
@@ -16,9 +16,13 @@ class ApplicationController < ActionController::Base
   end
   
   def game
-    @gamenum = params[:id]
-    @gamename = Game.find_by(id: @gamenum).name
+    @game = Game.find_by(id: params[:id])
     render 'game', :layout => false
+  end
+  
+  def edit_game
+    @game = Game.find_by(id: params[:id])
+    render 'edit'
   end
   
   def file_upload
@@ -26,7 +30,7 @@ class ApplicationController < ActionController::Base
     @game = Game.new
     @game.user_id = session[:user_id]
     if @filename.index(".unity3d") != nil
-      @game.name = @filename[0..@filename.index(".unity3d")]
+      @game.name = @filename[0..(@filename.index(".unity3d")-1)]
       
       if @game.save
         Dir.mkdir "#{Rails.root}/app/assets/games/game#{@game.id}"

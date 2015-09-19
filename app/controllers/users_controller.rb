@@ -14,7 +14,12 @@ class UsersController < ApplicationController
           session[:user_id] = @user.id
           redirect_to "/users/view"
         else
-          redirect_to "/signup"
+            if @user.password == @user.password_confirmation
+                session[:error_msg] = "Password and Confimation don't match"
+            else
+                session[:error_msg] = "Username taken"
+            end
+            redirect_to "/signup"
         end
     end
     
@@ -23,7 +28,24 @@ class UsersController < ApplicationController
     end
     
     def login
+        @user = User.find_by(username: params[:username])
+        if @user && @user.authenticate(params[:password])
+            session[:user_id] = @user.id
+            session[:error_msg] = nil
+            redirect_to "/"
+        else
+            if !@user
+                session[:error_msg] = "Username not found"
+            else
+                session[:error_msg] = "Wrong password"
+            end
+            redirect_to "/login_page"
+        end
+    end
     
+    def logout
+       reset_session
+       redirect_to "/"
     end
     
     def view

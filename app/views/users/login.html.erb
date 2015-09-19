@@ -1,0 +1,21 @@
+<div class="login-container section-container">
+  <div class="section-header">
+    <h2 class="signup-header">Login</h2>
+  </div>
+  <%if session[:error_msg] != nil%>
+  <div class="login_error"><%=session[:error_msg]%></div>
+  <%end%>
+  <div class="section-content">
+    <form action="/login">
+      <div class="form-input">
+        <label>Username</label>
+        <input type="text" name="username">
+      </div>
+      <div class="form-input">
+        <label>Password</label>
+        <input type="password" name="password">
+      </div>
+      <input type="submit" class="button-1" value="Login">
+    </form>
+  </div>
+</div>
