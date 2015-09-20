@@ -129,3 +129,8 @@ input:focus{
     height: 300px;
     margin: auto;
 }
+
+.form-input p{
+    margin: 0;
+    padding: 6px 0 12px;
+}
