@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'application#home'
   
   get '/game/:id' => 'application#game'
+  get '/game/edit/:id' => 'application#edit'
+  get '/game/update/:id' => 'application#update'
   
   get "/signup" => "users#new"
   get '/users/create' => 'users#create'

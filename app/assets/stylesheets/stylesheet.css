@@ -4,8 +4,22 @@ body{
 }
 
 a{
-    color: rgb(35,100,250);
     text-decoration: none;
+    color: rgb(30,100,250);
+    padding:4px;
+    border-radius: 4px;
+    background-color: rgba(255,255,255,100);
+    transition: background-color 200ms linear, color 200ms linear, text-decoration 200ms linear, padding 20ms linear;
+}
+
+a:hover{
+    color: white;
+    background-color: rgb(30,100,250);
+    text-decoration: underline;
+}
+
+a:active{
+    padding: 6px;
 }
 
 .header_text{
@@ -34,6 +48,7 @@ a{
     border-radius: 10px;
     padding: 0 0 20px;
     z-index: -10;
+    margin-bottom: 30px;
 }
 
 .login_error{
@@ -78,4 +93,39 @@ input:focus{
 
 .button-1:hover{
   background-color:rgb(150,150,150);
+}
+
+#game_container{
+    position: relative;
+    margin: 30px 0;
+}
+
+#game_name{
+    position: absolute;
+    width:100%;
+    margin:0;
+    margin-top:140px;
+    z-index: 10;
+    background-color: rgba(255,255,255,0.5);
+    padding:4px 0;
+}
+
+#img_cover{
+    width:300px;
+    height:300px;
+    position: absolute;
+    background-color: rgba(100,100,100,0.5);
+    margin: 0;
+    margin-top: -305px;
+    transition: all 200ms linear;
+}
+
+#img_cover:hover{
+    background-color: rgba(255,255,255,0);
+}
+
+#img_container{
+    width: 300px;
+    height: 300px;
+    margin: auto;
 }

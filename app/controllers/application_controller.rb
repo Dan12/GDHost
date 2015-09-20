@@ -21,9 +21,28 @@ class ApplicationController < ActionController::Base
     render 'game', :layout => false
   end
   
+  def update
+    @game = Game.find_by(id: params[:id])
+    if @game.user_id.to_s == session[:user_id].to_s
+      @game.img_url = params[:img_url]
+      @game.save
+    end
+    redirect_to "/game/#{@game.id}"
+  end
+  
+  def edit
+    @game = Game.find_by(id: params[:id])
+    if @game.user_id.to_s == session[:user_id].to_s
+      render 'edit'
+    else
+      redirect_to "/game/#{@game.id}"
+    end
+  end
+  
   def file_upload
     @filename = File.basename(params[:datafile].original_filename)
     @game = Game.new
+    @game.img_url = "http://lorempixel.com/300/300/technics"
     @game.user_id = session[:user_id]
     if @filename.index(".unity3d") != nil
       @game.name = @filename[0..(@filename.index(".unity3d")-1)]

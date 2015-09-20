@@ -141,5 +141,8 @@
 				</div>
 			</div>
 		</div>
+		<%if session[:user_id].to_s == User.find_by(id: @game.user_id).id.to_s%>
+			<a href="/game/edit/<%=@game.id%>">Edit Game</a>
+		<%end%>
 	</body>
 </html>
