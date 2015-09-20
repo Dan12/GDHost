@@ -18,25 +18,50 @@ class ApplicationController < ActionController::Base
   
   def game
     @game = Game.find_by(id: params[:id])
-    render 'game', :layout => false
+    if @game != nil
+      render 'game', :layout => false
+    else
+      redirect_to "/"
+    end
   end
   
   def update
     @game = Game.find_by(id: params[:id])
-    if @game.user_id.to_s == session[:user_id].to_s
-      @game.img_url = params[:img_url]
-      @game.save
+    if @game != nil
+      if @game.user_id.to_s == session[:user_id].to_s
+        @game.img_url = params[:img_url]
+        @game.save
+      end
+      redirect_to "/game/#{@game.id}"
+    else
+      redirect_to '/'
     end
-    redirect_to "/game/#{@game.id}"
   end
   
   def edit
     @game = Game.find_by(id: params[:id])
-    if @game.user_id.to_s == session[:user_id].to_s
-      render 'edit'
+    if @game != nil
+      if @game.user_id.to_s == session[:user_id].to_s
+        render 'edit'
+      else
+        redirect_to "/game/#{@game.id}"
+      end
     else
-      redirect_to "/game/#{@game.id}"
+      redirect_to '/'
     end
+  end
+  
+  def destroy
+    @game = Game.find_by(id: params[:id])
+    if @game != nil && @game.user_id.to_s == session[:user_id].to_s
+      @game.destroy
+    end
+    redirect_to "/"
+  end
+  
+  def send_game
+    @game = Game.find(params[:id])
+    send_data @game.data, :type => 'application/octet-stream'
   end
   
   def file_upload
@@ -46,13 +71,9 @@ class ApplicationController < ActionController::Base
     @game.user_id = session[:user_id]
     if @filename.index(".unity3d") != nil
       @game.name = @filename[0..(@filename.index(".unity3d")-1)]
-      
-      if @game.save
-        Dir.mkdir "#{Rails.root}/app/assets/games/game#{@game.id}"
-        File.open("#{Rails.root}/app/assets/games/game#{@game.id}/#{@filename}", "w+") do |f|
-          f.write(params[:datafile].read.encode("ASCII-8BIT").force_encoding("utf-8"))
-        end
-      end
+      @game.data = params[:datafile].read
+      puts params[:datafile].content_type
+      @game.save
     end
     redirect_to '/'
   end

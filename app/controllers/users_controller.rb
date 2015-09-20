@@ -13,7 +13,7 @@ class UsersController < ApplicationController
         if @user.save
           session[:user_id] = @user.id
           session[:error_msg] = nil
-          redirect_to "/users/view"
+          redirect_to "/users/view/#{@user.id}"
         else
             if @user.password == @user.password_confirmation
                 session[:error_msg] = "Password and Confimation don't match"
@@ -51,13 +51,21 @@ class UsersController < ApplicationController
     
     def view
         @user = User.find_by(id: params[:id])
-        render 'view'
+        if @user != nil
+            render 'view'
+        else
+            redirect_to '/'
+        end
     end
     
     def edit
         if params[:id].to_s == session[:user_id].to_s
             @user = User.find_by(id: session[:user_id])
-            render "edit"
+            if @user != nil
+                render "edit"
+            else
+                redirect_to '/'
+            end
         else
             redirect_to "/users/view/#{params[:id]}"
         end
@@ -66,20 +74,24 @@ class UsersController < ApplicationController
     def update
         if params[:id].to_s == session[:user_id].to_s
             @user = User.find_by(id: session[:user_id])
-            @user.username = params[:username]
-            @user.password = params[:password]
-            @user.password_confirmation = params[:password_confirmation]
-            
-            if @user.save
-              session[:error_msg] = nil
-              redirect_to "/users/view/#{params[:id]}"
-            else
-                if @user.password == @user.password_confirmation
-                    session[:error_msg] = "Password and Confimation don't match"
+            if @user != nil
+                @user.username = params[:username]
+                @user.password = params[:password]
+                @user.password_confirmation = params[:password_confirmation]
+                
+                if @user.save
+                  session[:error_msg] = nil
+                  redirect_to "/users/view/#{params[:id]}"
                 else
-                    session[:error_msg] = "Username taken"
+                    if @user.password == @user.password_confirmation
+                        session[:error_msg] = "Password and Confimation don't match"
+                    else
+                        session[:error_msg] = "Username taken"
+                    end
+                    redirect_to "/users/edit/#{@user.id}"
                 end
-                redirect_to "/users/edit/#{@user.id}"
+            else
+                redirect_to '/'
             end
         else
             redirect_to "/users/view/#{params[:id]}"

@@ -56,7 +56,7 @@
 						break;
 					}
 				});
-				u.initPlugin(jQuery("#unityPlayer")[0], "<%= asset_path("game"+@game.id.to_s+"/"+@game.name+".unity3d") %>");
+				u.initPlugin(jQuery("#unityPlayer")[0], "<%=url_for(:controller => "application", :action => "send_game", :id => @game.id)%>");
 			});
 		-->
 		</script>
