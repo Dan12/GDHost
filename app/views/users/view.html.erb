@@ -1,1 +1,12 @@
-<h1><%=@user.username%></h1>
+<div class="section-header">
+    <h1><%=@user.username%></h1>
+</div>
+<%if @user.id == session[:user_id]%>
+    <a href="/users/edit/<%=@user.id%>">Edit Profile</a>
+    <br>
+    <br>
+<%end%>
+<h2>Games:</h2>
+<% @user.games.reverse.each do |g|%>
+<a href="/game/<%=g.id%>"><%=g.name%></a>
+<% end %>

@@ -7,15 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if session[:user_id] == nil %>
-<a href="/login_page">Login</a>
-<a href="/signup">Signup</a>
-<%else%>
-<label>Hello <%=User.find_by(id: session[:user_id]).username%></label>
-<a href="/logout">Logout</a>
-<%end%>
-<br>
-<%= yield %>
-
+<div class="container">
+  <div class="header_text">
+    <% if session[:user_id] == nil %>
+    <a class="header_link" href="/login_page">Login</a> |
+    <a class="header_link" href="/signup">Signup</a>
+    <%else%>
+    <label >Hello <%=User.find_by(id: session[:user_id]).username%></label>
+    <a class="header_link" href="/logout">Logout</a>
+    <%end%>
+  </div>
+  <br>
+  <div class="home_text">
+    <a href="/">Home</a>
+  </div>
+  <br>
+  <div class="yield_content">
+    <%= yield %>
+  </div>
+</div>
 </body>
 </html>

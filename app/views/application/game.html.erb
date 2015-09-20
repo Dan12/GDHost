@@ -116,7 +116,17 @@
 		</style>
 	</head>
 	<body>
-		<p class="header"><span>Unity Web Player | </span><%=@game.name%> | By <%=User.find_by(id: @game.user_id).username%></p>
+		<% if session[:user_id] == nil %>
+		<a href="/login_page">Login</a>
+		<a href="/signup">Signup</a>
+		<%else%>
+		<label>Hello <%=User.find_by(id: session[:user_id]).username%></label>
+		<a href="/logout">Logout</a>
+		<%end%>
+		<br>
+		<a href="/">Home</a>
+		<br>
+		<p class="header"><span>Unity Web Player | </span><%=@game.name%> | By <a href="/users/view/<%=User.find_by(id: @game.user_id).id%>"><%=User.find_by(id: @game.user_id).username%></a></p>
 		<div class="content">
 			<div id="unityPlayer">
 				<div class="missing">
@@ -131,6 +141,5 @@
 				</div>
 			</div>
 		</div>
-		<a href="/game/edit/<%=@game.id%>">Edit</a>
 	</body>
 </html>

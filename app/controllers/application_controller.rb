@@ -3,11 +3,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  before_filter :login_required, :except => [:home, :new, :create, :login_page, :login, :file_upload, :game]
+  before_filter :login_required, :only => [:edit, :update, :destroy, :file_upload]
   
   def login_required
     if session[:user_id] == nil || User.find_by(id: session[:user_id]) == nil
-      redirect_to "/"
+      session[:error_msg] = "You must signup before completing this action"
+      redirect_to "/signup"
     end
   end
   
@@ -18,11 +19,6 @@ class ApplicationController < ActionController::Base
   def game
     @game = Game.find_by(id: params[:id])
     render 'game', :layout => false
-  end
-  
-  def edit_game
-    @game = Game.find_by(id: params[:id])
-    render 'edit'
   end
   
   def file_upload

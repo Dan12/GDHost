@@ -12,6 +12,7 @@ class UsersController < ApplicationController
         
         if @user.save
           session[:user_id] = @user.id
+          session[:error_msg] = nil
           redirect_to "/users/view"
         else
             if @user.password == @user.password_confirmation
@@ -49,19 +50,39 @@ class UsersController < ApplicationController
     end
     
     def view
-        @user = User.find_by(id: session[:user_id])
+        @user = User.find_by(id: params[:id])
         render 'view'
     end
     
     def edit
-        
+        if params[:id].to_s == session[:user_id].to_s
+            @user = User.find_by(id: session[:user_id])
+            render "edit"
+        else
+            redirect_to "/users/view/#{params[:id]}"
+        end
     end
     
     def update
-        
-    end
-    
-    def destroy
-        
+        if params[:id].to_s == session[:user_id].to_s
+            @user = User.find_by(id: session[:user_id])
+            @user.username = params[:username]
+            @user.password = params[:password]
+            @user.password_confirmation = params[:password_confirmation]
+            
+            if @user.save
+              session[:error_msg] = nil
+              redirect_to "/users/view/#{params[:id]}"
+            else
+                if @user.password == @user.password_confirmation
+                    session[:error_msg] = "Password and Confimation don't match"
+                else
+                    session[:error_msg] = "Username taken"
+                end
+                redirect_to "/users/edit/#{@user.id}"
+            end
+        else
+            redirect_to "/users/view/#{params[:id]}"
+        end
     end
 end

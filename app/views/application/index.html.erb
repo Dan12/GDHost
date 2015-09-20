@@ -1,10 +1,16 @@
-<h1>hello</h1>
-<% Game.all.each do |g| %>
-    <a href="/game/<%=g.id%>">Game <%=g.id%></a>
-    <br>
-<% end %>
+<div class="section-header">
+<h1>Unity Web Game Hosting</h1>
+</div>
+<h2>Game Upload</h2>
 <%= form_tag({action: :file_upload}, multipart: true) do %>
     <label>.unity3d file</label>
     <%= file_field_tag 'datafile' %>
     <%= submit_tag "Upload" %>
+<% end %>
+<h2>Recently Uploaded</h2>
+<% Game.all.reverse.each do |g| %>
+    <a href="/game/<%=g.id%>">Game <%=g.id%></a>
+    <span> by </span>
+    <a href="/users/view/<%=User.find_by(id: g.user_id.to_s).id%>"><%=User.find_by(id: g.user_id).username%></a>
+    <br>
 <% end %>

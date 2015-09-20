@@ -3,10 +3,6 @@ Rails.application.routes.draw do
   
   get '/game/:id' => 'application#game'
   
-  get '/game/edit/:id' => 'application#edit_game'
-  get '/game/change/:id' => 'application#change_game'
-  get '/game/destroy/:id' => 'application#destroy_game'
-  
   get "/signup" => "users#new"
   get '/users/create' => 'users#create'
   
@@ -15,7 +11,9 @@ Rails.application.routes.draw do
   
   get '/logout' => 'users#logout'
   
-  get '/users/view' => 'users#view'
+  get '/users/view/:id' => 'users#view'
+  get '/users/edit/:id' => 'users#edit'
+  get '/users/update/:id' => 'users#update'
   
   post '/file_upload' => 'application#file_upload'
 end
