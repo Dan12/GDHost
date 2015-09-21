@@ -2,7 +2,7 @@
 
 This application is to be used to host the Unity projects of those in my game design class.
 
-This application is hosted at https://github.com/Dan12/GDHost
+This application is hosted at https://lit-beyond-4450.herokuapp.com/
 
 Features:
 
