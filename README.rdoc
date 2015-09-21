@@ -1,28 +1,15 @@
-== README
+== Game Design Host
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application is to be used to host the Unity projects of those in my game design class.
 
-Things you may want to cover:
+This application is hosted at https://github.com/Dan12/GDHost
 
-* Ruby version
+Features:
 
-* System dependencies
+*Heroku Postgres database hobby/dev plan (10000 rows)
 
-* Configuration
+*bcrypt user authentication
 
-* Database creation
+*.unity3d files stored in database and loaded to application through send_data function
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+*Thumbnails are initially randomly generated from http://lorempixel.com/, but can be changed to a custom image uploaded to any image hosting service
