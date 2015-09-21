@@ -2,11 +2,15 @@
 <h1>Unity Web Game Hosting</h1>
 </div>
 <h2>Game Upload</h2>
-<%= form_tag({action: :file_upload}, multipart: true) do %>
-    <label>.unity3d file</label>
-    <%= file_field_tag 'datafile' %>
-    <%= submit_tag "Upload" %>
-<% end %>
+<% if session[:user_id] != nil %>
+    <%= form_tag({action: :file_upload}, multipart: true) do %>
+        <label>.unity3d file</label>
+        <%= file_field_tag 'datafile' %>
+        <%= submit_tag "Upload" %>
+    <% end %>
+<%else%>
+    <p>You must <a href="/signup">Signup</a> or <a href="/login_page">Login</a> to upload a game</p>
+<%end%>
 <h2>Recently Uploaded</h2>
 <% Game.all.reverse.each do |g| %>
     <div id="game_container">
