@@ -6,10 +6,10 @@ This application is hosted at https://github.com/Dan12/GDHost
 
 Features:
 
-*Heroku Postgres database hobby/dev plan (10000 rows)
+* Heroku Postgres database hobby/dev plan (10000 rows)
 
-*bcrypt user authentication
+* bcrypt user authentication
 
-*.unity3d files stored in database and loaded to application through send_data function
+* .unity3d files stored in database and loaded to application through send_data function
 
-*Thumbnails are initially randomly generated from http://lorempixel.com/, but can be changed to a custom image uploaded to any image hosting service
+* Thumbnails are initially randomly generated from http://lorempixel.com/, but can be changed to a custom image uploaded to any image hosting service
