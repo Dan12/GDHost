@@ -77,4 +77,8 @@ class ApplicationController < ActionController::Base
     end
     redirect_to '/'
   end
+  
+  def google13ecc4458e525973
+    render 'google13ecc4458e525973', :layout => false
+  end
 end
