@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   get 'send_game' => 'application#send_game'
   
   post '/file_upload' => 'application#file_upload'
+  
+  get '/google13ecc4458e525973' => 'application#google13ecc4458e525973'
 end
