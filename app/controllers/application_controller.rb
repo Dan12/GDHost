@@ -70,8 +70,8 @@ class ApplicationController < ActionController::Base
     @filename = File.basename(params[:datafile].original_filename)
     @game = Game.new
     @game.img_url = "http://www.codeintheschools.org/wp-content/uploads/2015/04/unity3d-atc.png"
-    @image.width = 640;
-    @image.height = 480;
+    @game.width = 640;
+    @game.height = 480;
     @game.user_id = session[:user_id]
     if @filename.index(".unity3d") != nil
       @game.name = @filename[0..(@filename.index(".unity3d")-1)]
