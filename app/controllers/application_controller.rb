@@ -77,9 +77,14 @@ class ApplicationController < ActionController::Base
       @game.name = @filename[0..(@filename.index(".unity3d")-1)]
       @game.data = params[:datafile].read
       puts params[:datafile].content_type
-      @game.save
+      if @game.save
+        redirect_to "/game/#{@game.id}"
+      else
+        redirect_to '/'
+      end
+    else
+      redirect_to '/'
     end
-    redirect_to '/'
   end
   
   def google13ecc4458e525973
