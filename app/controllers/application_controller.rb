@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
     if @game != nil
       if @game.user_id.to_s == session[:user_id].to_s
         @game.img_url = params[:img_url]
+        @game.width = params[:width].to_i
+        @game.height = params[:height].to_i
         @game.save
       end
       redirect_to "/game/#{@game.id}"
@@ -67,7 +69,9 @@ class ApplicationController < ActionController::Base
   def file_upload
     @filename = File.basename(params[:datafile].original_filename)
     @game = Game.new
-    @game.img_url = "http://lorempixel.com/300/300/technics"
+    @game.img_url = "http://www.codeintheschools.org/wp-content/uploads/2015/04/unity3d-atc.png"
+    @image.width = 640;
+    @image.height = 480;
     @game.user_id = session[:user_id]
     if @filename.index(".unity3d") != nil
       @game.name = @filename[0..(@filename.index(".unity3d")-1)]

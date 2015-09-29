@@ -5,11 +5,19 @@
   <div class="section-content">
     <form action="/game/update/<%=@game.id%>">
       <div class="form-input">
-        <p>Upload your image to <a href="http://postimage.org/">Post Image</a> and paste the direct url here:</p>
+        <p>Upload your image to an image hosting site and paste the direct url (should end in .png or something like that) here:</p>
         <label>Thumbnail Image Url</label>
         <input type="text" name="img_url" value="<%=@game.img_url%>">
       </div>
-      <input type="submit" class="button-1" value="Submit">
+      <div class="form-input">
+        <label>Game Width</label>
+        <input type="text" name="width" value="<%=@game.width%>">
+      </div>
+      <div class="form-input">
+        <label>Game Height</label>
+        <input type="text" name="height" value="<%=@game.height%>">
+      </div>
+      <input type="submit" class="button-1" value="Save">
     </form>
     <a class="delete-game" href="/game/destroy/<%=@game.id%>">Delete Game</a>
   </div>
