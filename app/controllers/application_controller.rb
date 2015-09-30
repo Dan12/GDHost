@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
         @game.img_url = params[:img_url]
         @game.width = params[:width].to_i
         @game.height = params[:height].to_i
+        @game.name = params[:name]
         @game.save
       end
       redirect_to "/game/#{@game.id}"
