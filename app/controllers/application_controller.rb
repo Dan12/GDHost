@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  before_filter :login_required, :only => [:edit, :update, :destroy, :file_upload]
+  before_filter :login_required, :only => [:edit, :update, :destroy, :file_upload, :file_reupload]
   
   def login_required
     if session[:user_id] == nil || User.find_by(id: session[:user_id]) == nil
@@ -63,8 +63,18 @@ class ApplicationController < ActionController::Base
   end
   
   def send_game
-    @game = Game.find(params[:id])
+    @game = Game.find_by(id: params[:id])
     send_data @game.data, :type => 'application/octet-stream'
+  end
+  
+  def file_reupload
+    @filename = File.basename(params[:datafile].original_filename)
+    if @filename.index(".unity3d") != nil
+      @game = Game.find_by(id: params[:id])
+      @game.data = params[:datafile].read
+      @game.save
+    end
+    redirect_to "/game/#{@game.id}"
   end
   
   def file_upload

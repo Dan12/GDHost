@@ -23,6 +23,12 @@
       </div>
       <input type="submit" class="button-1" value="Save">
     </form>
+    <%= form_tag({:action => "file_reupload"}, multipart: true, :class => "upload-form") do %>
+      <p>Reupload game:</p>
+      <label>.unity3d file</label>
+      <%= file_field_tag 'datafile' %>
+      <%= submit_tag "Upload" %>
+    <% end %>
     <a class="delete-game" href="/game/destroy/<%=@game.id%>">Delete Game</a>
   </div>
 </div>

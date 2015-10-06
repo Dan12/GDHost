@@ -22,5 +22,7 @@ Rails.application.routes.draw do
   
   post '/file_upload' => 'application#file_upload'
   
+  post '/file_reupload/:id' => 'application#file_reupload'
+  
   get '/google13ecc4458e525973' => 'application#google13ecc4458e525973'
 end

@@ -134,3 +134,7 @@ input:focus{
     margin: 0;
     padding: 6px 0 12px;
 }
+
+.upload-form{
+    margin: 10px;
+}
