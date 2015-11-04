@@ -12,7 +12,7 @@
     <p>You must <a href="/signup">Signup</a> or <a href="/login_page">Login</a> to upload a game</p>
 <%end%>
 <h2>Recently Uploaded</h2>
-<% Game.last(10).reverse.each do |g| %>
+<% Game.last(5).reverse.each do |g| %>
     <%u = User.find_by(id: g.user_id.to_s)%>
     <div id="game_container">
         <p id="game_name">
