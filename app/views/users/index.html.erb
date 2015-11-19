@@ -1,0 +1,8 @@
+<div class="section-header">
+    <h1>Users</h1>
+</div>
+<% User.find_each do |u|%>
+    <div id="user_container">
+      <h2><a href="/users/view/<%=u.id%>"><%=u.username%></a></h2>
+    </div>
+<% end %>

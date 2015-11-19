@@ -126,7 +126,7 @@
 		<br>
 		<a href="/">Home</a>
 		<br>
-		<p class="header"><span>Unity Web Player | </span><%=@game.name%> | By <a href="/users/view/<%=User.find_by(id: @game.user_id).id%>"><%=User.find_by(id: @game.user_id).username%></a></p>
+		<p class="header"><span>Unity Web Player | </span><%=@game.name%> | By <a href="/users/view/<%=@user.id%>"><%=@user.username%></a></p>
 		<div class="content">
 			<div id="unityPlayer">
 				<div class="missing">
@@ -141,7 +141,7 @@
 				</div>
 			</div>
 		</div>
-		<%if session[:user_id].to_s == User.find_by(id: @game.user_id).id.to_s%>
+		<%if session[:user_id].to_s == @user.id.to_s%>
 			<a href="/game/edit/<%=@game.id%>">Edit Game</a>
 		<%end%>
 	</body>

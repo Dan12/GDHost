@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
   def game
     @game = Game.find_by(id: params[:id])
     if @game != nil
+      @user = User.find_by(id: @game.user_id)
       render 'game', :layout => false
     else
       redirect_to "/"

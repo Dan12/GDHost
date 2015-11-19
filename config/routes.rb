@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/users/view/:id' => 'users#view'
   get '/users/edit/:id' => 'users#edit'
   get '/users/update/:id' => 'users#update'
+  get '/users/index' => 'users#index'
   
   get 'send_game' => 'application#send_game'
   

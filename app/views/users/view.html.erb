@@ -12,7 +12,7 @@
         <p id="game_name">
             <a href="/game/<%=g.id%>"><%=g.name%></a>
             <span> by </span>
-            <a href="/users/view/<%=User.find_by(id: g.user_id.to_s).id%>"><%=User.find_by(id: g.user_id).username%></a>
+            <a href="/users/view/<%=@user.id%>"><%=@user.username%></a>
         </p>
         <div id="img_container">
             <img src="<%=g.img_url%>" width="300px" height="300px"></img>

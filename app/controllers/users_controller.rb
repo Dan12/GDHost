@@ -97,4 +97,8 @@ class UsersController < ApplicationController
             redirect_to "/users/view/#{params[:id]}"
         end
     end
+    
+    def index
+       render "index" 
+    end
 end
