@@ -14,12 +14,9 @@
 <h2><a href="/users/index">View All Users</a></h2>
 <h2>Recently Uploaded</h2>
 <% Game.last(5).reverse.each do |g| %>
-    <%u = User.find_by(id: g.user_id.to_s)%>
     <div id="game_container">
         <p id="game_name">
             <a href="/game/<%=g.id%>"><%=g.name%></a>
-            <span> by </span>
-            <a href="/users/view/<%=u.id%>"><%=u.username%></a>
         </p>
         <div id="img_container">
             <img src="<%=g.img_url%>" width="300px" height="300px"></img>
